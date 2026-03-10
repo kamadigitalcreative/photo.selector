@@ -1,28 +1,191 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photo Selection</title>
-    
-    <!-- INI BARIS UNTUK MENAMPILKAN LOGO DI TAB BROWSER -->
-    <link rel="icon" href="Artboard 1.png" type="image/png">
-    
-    <style>
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #f6f6f9;}
-        iframe { width: 100%; height: 100%; border: none; }
-    </style>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Photo Selection</title>
+
+<link rel="icon" href="Artboard 1.png">
+
+<link rel="preconnect" href="https://script.google.com">
+
+<style>
+
+html,body{
+margin:0;
+padding:0;
+height:100%;
+width:100%;
+font-family:Segoe UI,Arial,sans-serif;
+background:#f6f6f9;
+overflow:hidden;
+}
+
+/* iframe */
+
+#app-frame{
+width:100%;
+height:100%;
+border:none;
+display:none;
+}
+
+/* loading screen */
+
+#loading-screen{
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+background:#f6f6f9;
+}
+
+.loading-box{
+background:white;
+padding:35px;
+border-radius:18px;
+box-shadow:0 12px 35px rgba(0,0,0,0.08);
+text-align:center;
+}
+
+.spinner{
+width:42px;
+height:42px;
+border:4px solid #eee;
+border-top:4px solid #1e1e2d;
+border-radius:50%;
+animation:spin 1s linear infinite;
+margin:auto;
+margin-bottom:15px;
+}
+
+@keyframes spin{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
+.title{
+font-size:18px;
+font-weight:600;
+margin-bottom:5px;
+}
+
+.subtitle{
+font-size:13px;
+color:#777;
+}
+
+</style>
+
 </head>
+
 <body>
-    <script>
-        // MASUKKAN URL DEPLOYMENT GOOGLE SCRIPT ANDA DI SINI (Yang berakhiran /exec)
-        var gasURL = "https://script.google.com/macros/s/AKfycbxRFQVmTFVtXcEV6T8XuqUeYI1mKPo4HmT3zcrYtqVIbnyJQu66F824HQ1G3eGxZkhg/exec";
-        
-        // Mengambil kode parameter slug dari link (misal: ?c=JohnWedding)
-        var queryString = window.location.search; 
-        
-        // Memuat Aplikasi Google Anda ke dalam bingkai Iframe secara Full Screen
-        document.write('<iframe src="' + gasURL + queryString + '" allow="camera; microphone; fullscreen; clipboard-read; clipboard-write"></iframe>');
-    </script>
+
+<iframe id="app-frame" allow="camera; microphone; clipboard-write"></iframe>
+
+<div id="loading-screen">
+
+<div class="loading-box">
+
+<div class="spinner"></div>
+
+<div class="title">
+Opening Client Gallery
+</div>
+
+<div class="subtitle">
+Photo Selection
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+/* ======================================================
+CONFIG
+====================================================== */
+
+const GAS_URL = "https://script.google.com/macros/s/AKfycbxRFQVmTFVtXcEV6T8XuqUeYI1mKPo4HmT3zcrYtqVIbnyJQu66F824HQ1G3eGxZkhg/exec";
+
+
+/* ======================================================
+GET PARAMETER
+====================================================== */
+
+const urlParams = new URLSearchParams(window.location.search);
+
+let clientCode = urlParams.get("c");
+let projectCode = urlParams.get("project");
+
+/* ======================================================
+SMART PATH SUPPORT
+example: ps.domain.com/abcd
+====================================================== */
+
+const path = window.location.pathname.replace("/","");
+
+if(!clientCode && path){
+clientCode = path;
+}
+
+/* ======================================================
+BUILD FINAL URL
+====================================================== */
+
+let finalURL = GAS_URL;
+
+if(clientCode){
+
+finalURL += "?c=" + clientCode;
+
+}else if(projectCode){
+
+finalURL += "?project=" + projectCode;
+
+}
+
+
+/* ======================================================
+LOAD WEB APP
+====================================================== */
+
+const iframe = document.getElementById("app-frame");
+
+iframe.src = finalURL;
+
+iframe.onload = function(){
+
+document.getElementById("loading-screen").style.display="none";
+
+iframe.style.display="block";
+
+};
+
+
+/* ======================================================
+BASIC PROTECTION
+====================================================== */
+
+document.addEventListener("contextmenu",e=>e.preventDefault());
+
+document.onkeydown=function(e){
+
+if(e.keyCode==123) return false;
+
+if(e.ctrlKey && e.shiftKey && e.keyCode==73) return false;
+
+if(e.ctrlKey && e.keyCode==85) return false;
+
+}
+
+</script>
+
 </body>
+
 </html>
