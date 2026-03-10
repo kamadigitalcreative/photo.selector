@@ -2,24 +2,51 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Photo Selection</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- INI BARIS UNTUK MENAMPILKAN LOGO DI TAB BROWSER -->
-    <!-- Pastikan file "Artboard 1.png" sudah diupload di repository GitHub Anda -->
-    <link rel="icon" href="Artboard 1.png" type="image/png">
-
-    <script>
-        // 1. URL Web App Apps Script Anda
-        var appsScriptUrl = "https://script.google.com/macros/s/AKfycbxSu7ozoyP5orZ7bGKaONnQqDVfk4_69BXhQqWeMDn3jGtwFuHwClIU4CDTSbkUCrn9/exec";
-        
-        // 2. Redirect secara langsung beserta parameter (?c=...)
-        // Metode ini digunakan untuk mencegah Error Pemblokiran Google Drive pada Iframe
-        window.location.replace(appsScriptUrl + window.location.search);
-    </script>
+    <link rel="icon" type="image/x-icon" href="Artboard 1.png">
+    
+    <title>Photo Selection</title>
+    
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .header {
+            background-color: #ffffff;
+            color: #333;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #4285F4; /* Warna khas Google */
+        }
+        iframe {
+            width: 100%;
+            height: calc(100vh - 50px); /* Menyesuaikan tinggi header */
+            border: none;
+        }
+    </style>
 </head>
-<body style="font-family: sans-serif; text-align: center; padding-top: 50px; background: #f6f6f9;">
-    <h3>Menyiapkan Galeri...</h3>
-    <p style="color: #666; font-size: 14px;">Mohon tunggu sebentar.</p>
+<body>
+
+    <div class="header">
+        <h1>Photo Selection App</h1>
+    </div>
+
+    <iframe src="https://script.google.com/macros/s/AKfycbxSu7ozoyP5orZ7bGKaONnQqDVfk4_69BXhQqWeMDn3jGtwFuHwClIU4CDTSbkUCrn9/exec">
+        Memuat aplikasi...
+    </iframe>
+
 </body>
 </html>
