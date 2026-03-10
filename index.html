@@ -4,39 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Photo Selection</title>
+
+    <link rel="icon" type="image/png" href="Artboard 1.png""> 
     <style>
+        /* Menghilangkan margin dan membuat tampilan full screen */
         body, html {
-            margin: 0; padding: 0; width: 100vw; height: 100vh; overflow: hidden; background-color: #f6f6f9;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background-color: #ffffff;
         }
-        /* Trik CSS untuk menyembunyikan banner Google Apps Script */
-        iframe {
+
+        .container {
             position: absolute;
-            top: -28px; /* Menggeser iframe ke atas untuk menyembunyikan banner */
+            top: 0;
             left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
             border: none;
-            width: 100vw;
-            height: calc(100vh + 28px); /* Menambah tinggi untuk kompensasi pergeseran */
+            display: block;
         }
     </style>
 </head>
 <body>
 
-    <iframe id="gasFrame" src=""></iframe>
-
-    <script>
-        // MASUKKAN URL WEB APP GOOGLE APPS SCRIPT ANDA DI BAWAH INI (Akhiran /exec)
-        const gasAppUrl = "https://script.google.com/macros/s/AKfycbx0bDvC9OnC_0XMfBW5GKWVxacb1xFwyiwJ-7du4gEC_CmvSoSGHDGWzzsHFUnK4-eq/exec";
-
-        // Ambil parameter dari link pendek (contoh: ?c=Wedding123)
-        const queryString = window.location.search;
-
-        // Tembak URL lengkap ke dalam iframe pembungkus
-        document.getElementById('gasFrame').src = gasAppUrl + queryString;
-    </script>
+    <div class="container">
+        <iframe 
+            src="https://script.google.com/macros/s/AKfycbx0bDvC9OnC_0XMfBW5GKWVxacb1xFwyiwJ-7du4gEC_CmvSoSGHDGWzzsHFUnK4-eq/exec" 
+            allow="geolocation; microphone; camera; encrypted-media;"
+            allowfullscreen="true">
+        </iframe>
+    </div>
 
 </body>
 </html>
-
-
-
 
