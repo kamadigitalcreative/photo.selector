@@ -2,41 +2,37 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Photo Selection</title>
-    <link rel="icon" href="Artboard 1.png" type="image/png">
     <style>
-        /* Memastikan Iframe memenuhi seluruh layar tanpa scrollbar tambahan */
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background-color: #f6f6f9; }
-        iframe { border: none; width: 100%; height: 100%; display: block; }
-        .spinner-container { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; font-family: system-ui, sans-serif; color: #1e1e2d; }
-        .spinner { width: 40px; height: 40px; border: 4px solid rgba(59, 130, 246, 0.2); border-left-color: #3b82f6; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        body, html {
+            margin: 0; padding: 0; width: 100vw; height: 100vh; overflow: hidden; background-color: #f6f6f9;
+        }
+        /* Trik CSS untuk menyembunyikan banner Google Apps Script */
+        iframe {
+            position: absolute;
+            top: -28px; /* Menggeser iframe ke atas untuk menyembunyikan banner */
+            left: 0;
+            border: none;
+            width: 100vw;
+            height: calc(100vh + 28px); /* Menambah tinggi untuk kompensasi pergeseran */
+        }
     </style>
 </head>
 <body>
+
+    <iframe id="gasFrame" src=""></iframe>
+
     <script>
-        // 1. Tangkap kode slug (?c=...) dari URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const c = urlParams.get('c');
-        
-        // 2. PASTE URL WEB APP GOOGLE APPS SCRIPT ANDA DI SINI (Akhiran /exec)
-        const webAppUrl = "https://script.google.com/macros/s/AKfycbxSu7ozoyP5orZ7bGKaONnQqDVfk4_69BXhQqWeMDn3jGtwFuHwClIU4CDTSbkUCrn9/exec"; 
-        
-        if (c) {
-            // JIKA KLIEN: Tampilkan animasi loading lalu lempar ke Google (Agar bebas error Drive)
-            document.write(`
-                <div class="spinner-container">
-                    <div class="spinner"></div>
-                    <h3 style="font-size: 16px; font-weight: 600; margin:0;">Mengalihkan ke Galeri...</h3>
-                    <p style="font-size: 12px; color: #6b7280; margin-top:8px;">Mohon tunggu sebentar.</p>
-                </div>
-            `);
-            window.location.replace(webAppUrl + "?c=" + c);
-        } else {
-            // JIKA ADMIN/FOTOGRAFER: Tampilkan pakai Iframe (URL di atas tetap pendek!)
-            document.write('<iframe src="' + webAppUrl + '"></iframe>');
-        }
+        // MASUKKAN URL WEB APP GOOGLE APPS SCRIPT ANDA DI BAWAH INI (Akhiran /exec)
+        const gasAppUrl = "https://script.google.com/macros/s/AKfycbxSu7ozoyP5orZ7bGKaONnQqDVfk4_69BXhQqWeMDn3jGtwFuHwClIU4CDTSbkUCrn9/exec";
+
+        // Ambil parameter dari link pendek (contoh: ?c=Wedding123)
+        const queryString = window.location.search;
+
+        // Tembak URL lengkap ke dalam iframe pembungkus
+        document.getElementById('gasFrame').src = gasAppUrl + queryString;
     </script>
+
 </body>
 </html>
