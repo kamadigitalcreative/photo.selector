@@ -4,55 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photo Selection</title>
-    <link rel="icon" type="image/png" href="Artboard 1.png">
+    
+    <!-- INI BARIS UNTUK MENAMPILKAN LOGO DI TAB BROWSER -->
+    <link rel="icon" href="Artboard 1.png" type="image/png">
+    
     <style>
-        body, html {
-            margin: 0; padding: 0; height: 100vh;
-            display: flex; justify-content: center; align-items: center;
-            background-color: #f6f6f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #1e1e2d;
-        }
-        .loading-container {
-            text-align: center;
-            padding: 30px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        }
-        .spinner {
-            border: 4px solid #ececf1;
-            border-top: 4px solid #1e1e2d;
-            border-radius: 50%;
-            width: 40px; height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 16px auto;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #f6f6f9;}
+        iframe { width: 100%; height: 100%; border: none; }
     </style>
 </head>
 <body>
-
-    <div class="loading-container">
-        <div class="spinner"></div>
-        <h3 style="margin: 0 0 8px 0; font-size: 18px;">Membuka Galeri...</h3>
-        <p style="margin: 0; font-size: 13px; color: #6b7280;">Mohon tunggu sebentar.</p>
-    </div>
-
     <script>
-        // =========================================================================
-        // 1. GANTI LINK DI BAWAH INI dengan link Web App Google Apps Script Anda.
-        // Pastikan link diakhiri dengan "/exec"
-        // =========================================================================
-        var gasWebAppUrl = "https://script.google.com/macros/s/AKfycbxRFQVmTFVtXcEV6T8XuqUeYI1mKPo4HmT3zcrYtqVIbnyJQu66F824HQ1G3eGxZkhg/exec"; 
-
-        // Tangkap parameter pendek dari custom domain (misal: ?c=akuu)
-        var urlParams = window.location.search;
+        // MASUKKAN URL DEPLOYMENT GOOGLE SCRIPT ANDA DI SINI (Yang berakhiran /exec)
+        var gasURL = "https://script.google.com/macros/s/AKfycbxRFQVmTFVtXcEV6T8XuqUeYI1mKPo4HmT3zcrYtqVIbnyJQu66F824HQ1G3eGxZkhg/exec";
         
-        // Eksekusi redirect secara otomatis setelah 1 detik (agar animasi terlihat mulus)
-        setTimeout(function() {
-            window.location.replace(gasWebAppUrl + urlParams);
-        }, 1000);
+        // Mengambil kode parameter slug dari link (misal: ?c=JohnWedding)
+        var queryString = window.location.search; 
+        
+        // Memuat Aplikasi Google Anda ke dalam bingkai Iframe secara Full Screen
+        document.write('<iframe src="' + gasURL + queryString + '" allow="camera; microphone; fullscreen; clipboard-read; clipboard-write"></iframe>');
     </script>
-
 </body>
 </html>
