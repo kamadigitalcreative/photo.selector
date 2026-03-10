@@ -3,29 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
     <title>Photo Selection</title>
+    
+    <link rel="icon" type="image/png" href="Artboard 1.png">
 
-    <link rel="icon" type="image/png" href="Artboard 1.png""> 
     <style>
-        /* Menghilangkan margin dan membuat tampilan full screen */
+        /* CSS untuk membuat iframe tampil full screen menutupi seluruh layar */
         body, html {
             margin: 0;
             padding: 0;
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-            background-color: #ffffff;
-        }
-
-        .container {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
+            overflow: hidden; /* Mencegah scrollbar ganda */
+            background-color: #f6f6f9; /* Warna background saat loading awal */
         }
-
-        iframe {
+        #app-frame {
             width: 100%;
             height: 100%;
             border: none;
@@ -35,14 +28,25 @@
 </head>
 <body>
 
-    <div class="container">
-        <iframe 
-            src="https://script.google.com/macros/s/AKfycbx0bDvC9OnC_0XMfBW5GKWVxacb1xFwyiwJ-7du4gEC_CmvSoSGHDGWzzsHFUnK4-eq/exec" 
-            allow="geolocation; microphone; camera; encrypted-media;"
-            allowfullscreen="true">
-        </iframe>
-    </div>
+    <iframe id="app-frame" src="" allow="clipboard-write"></iframe>
+
+    <script>
+        // =========================================================================
+        // PENGATURAN LINK APLIKASI
+        // =========================================================================
+        
+        // 3. GANTI LINK DI BAWAH INI dengan link Web App Google Apps Script Anda.
+        // Pastikan link diakhiri dengan "/exec"
+        var gasWebAppUrl = "https://script.google.com/macros/s/AKfycbxRFQVmTFVtXcEV6T8XuqUeYI1mKPo4HmT3zcrYtqVIbnyJQu66F824HQ1G3eGxZkhg/exec"; 
+
+        // =========================================================================
+        
+        // Logika untuk menangkap parameter (misal: ?c=bzfhfhxfhxbx) dari custom domain
+        var urlParams = window.location.search;
+        
+        // Menempelkan parameter tersebut ke link GAS, lalu memasukkannya ke dalam Iframe
+        document.getElementById('app-frame').src = gasWebAppUrl + urlParams;
+    </script>
 
 </body>
 </html>
-
