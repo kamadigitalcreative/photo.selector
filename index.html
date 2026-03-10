@@ -2,29 +2,24 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photo Selection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- INI BARIS UNTUK MENAMPILKAN LOGO DI TAB BROWSER -->
+    <!-- Pastikan file "Artboard 1.png" sudah diupload di repository GitHub Anda -->
     <link rel="icon" href="Artboard 1.png" type="image/png">
-    
-    <style>
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #f6f6f9;}
-        iframe { width: 100%; height: 100%; border: none; }
-    </style>
-</head>
-<body>
+
     <script>
-        // MASUKKAN URL DEPLOYMENT GOOGLE SCRIPT ANDA DI SINI (Yang berakhiran /exec)
-        var gasURL = "https://script.google.com/macros/s/AKfycbyAjfms4NqZ-YGeWQuagaL9jxD8eRUAH5iaCrV-JT8CkQEH58blf6we7eYBKBXJ9Ojt/exec";
+        // 1. URL Web App Apps Script Anda
+        var appsScriptUrl = "https://script.google.com/macros/s/AKfycbxSu7ozoyP5orZ7bGKaONnQqDVfk4_69BXhQqWeMDn3jGtwFuHwClIU4CDTSbkUCrn9/exec";
         
-        // Mengambil kode parameter slug dari link (misal: ?c=JohnWedding)
-        var queryString = window.location.search; 
-        
-        // Memuat Aplikasi Google Anda ke dalam bingkai Iframe secara Full Screen
-        document.write('<iframe src="' + gasURL + queryString + '" allow="camera; microphone; fullscreen; clipboard-read; clipboard-write"></iframe>');
+        // 2. Redirect secara langsung beserta parameter (?c=...)
+        // Metode ini digunakan untuk mencegah Error Pemblokiran Google Drive pada Iframe
+        window.location.replace(appsScriptUrl + window.location.search);
     </script>
+</head>
+<body style="font-family: sans-serif; text-align: center; padding-top: 50px; background: #f6f6f9;">
+    <h3>Menyiapkan Galeri...</h3>
+    <p style="color: #666; font-size: 14px;">Mohon tunggu sebentar.</p>
 </body>
 </html>
-
-
