@@ -2,51 +2,27 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photo Selection</title>
-
-    <link rel="icon" type="image/png" href="Artboard 1.png"> 
+    
+    <!-- INI BARIS UNTUK MENAMPILKAN LOGO DI TAB BROWSER -->
+    <link rel="icon" href="Artboard1.png" type="image/png">
+    
     <style>
-        /* Menghilangkan margin dan membuat tampilan full screen */
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-            background-color: #ffffff;
-        }
-
-        .container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: block;
-        }
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #f6f6f9;}
+        iframe { width: 100%; height: 100%; border: none; }
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <iframe 
-            src="https://script.google.com/macros/s/AKfycbx0hB6L2mJHoA9HTr20cwFV2hxRy8l39f3eJdPVAQzvkUSENyo6KdNgbcnvKog3BZu9/exec" 
-            allow="geolocation; microphone; camera; encrypted-media;"
-            allowfullscreen="true">
-        </iframe>
-    </div>
-
+    <script>
+        // MASUKKAN URL DEPLOYMENT GOOGLE SCRIPT ANDA DI SINI (Yang berakhiran /exec)
+        var gasURL = "https://script.google.com/macros/s/AKfycbyR8G5cKsnA6F8aMaKLwzvcDpGL1lkG2n9zeg74Mwipl0F78oS49DaAQj1Ym5zsVEen/exec";
+        
+        // Mengambil kode parameter slug dari link (misal: ?c=JohnWedding)
+        var queryString = window.location.search; 
+        
+        // Memuat Aplikasi Google Anda ke dalam bingkai Iframe secara Full Screen
+        document.write('<iframe src="' + gasURL + queryString + '" allow="camera; microphone; fullscreen; clipboard-read; clipboard-write"></iframe>');
+    </script>
 </body>
 </html>
-
-
-
-
-
